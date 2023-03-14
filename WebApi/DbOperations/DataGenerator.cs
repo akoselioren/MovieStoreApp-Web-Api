@@ -22,7 +22,7 @@ namespace WebApi.DbOperations
                // Id = 1,
                 Title = "Lean Startup",
                 GenreId = 1,
-                RunningTime = new TimeSpan(2,45,05),
+                RunningTime = "02:45:05",
                 PublicationDate = new DateTime(2001, 06, 12)
             },
            new Movie
@@ -30,7 +30,7 @@ namespace WebApi.DbOperations
               // Id = 2,
                Title = "Herland",
                GenreId = 2,
-               RunningTime = new TimeSpan(2, 25, 45),
+               RunningTime = "02:25:45",
                PublicationDate = new DateTime(2010, 05, 23)
            },
            new Movie
@@ -38,7 +38,7 @@ namespace WebApi.DbOperations
               // Id = 3,
                Title = "Dune",
                GenreId = 2,
-               RunningTime = new TimeSpan(2, 40, 55),
+               RunningTime = "02:40:55",
                PublicationDate = new DateTime(2001, 12, 21)
            },
             new Movie
@@ -46,7 +46,7 @@ namespace WebApi.DbOperations
               //  Id = 4,
                 Title = "Lord Of The Rings",
                 GenreId = 3,
-                RunningTime = new TimeSpan(2, 08, 00),
+                RunningTime = "02:08:00",
                 PublicationDate = new DateTime(2001, 12, 21)
             },
          new Movie
@@ -54,7 +54,7 @@ namespace WebApi.DbOperations
             // Id = 5,
              Title = "Hobbit",
              GenreId = 2,
-             RunningTime = new TimeSpan(1, 58, 45),
+             RunningTime ="01:58:45",
              PublicationDate = new DateTime(2024, 08, 05)
          });
 

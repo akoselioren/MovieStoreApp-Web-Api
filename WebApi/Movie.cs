@@ -9,7 +9,7 @@ namespace WebApi
         public int Id { get; set; }
         public string Title { get; set; }
         public int GenreId { get; set; }
-        public TimeSpan RunningTime { get; set; }
+        public string RunningTime { get; set; }
         public DateTime PublicationDate { get; set; }
     }
 }
