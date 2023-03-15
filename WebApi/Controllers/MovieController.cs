@@ -12,6 +12,8 @@ using WebApi.MovieOperations.UpdateMovie;
 using WebApi.DbOperations;
 using static WebApi.MovieOperations.CreateMovie.CreateMovieCommand;
 using static WebApi.MovieOperations.UpdateMovie.UpdateMovieCommand;
+using FluentValidation.Results;
+using FluentValidation;
 
 namespace WebApi.Controllers
 {
@@ -40,17 +42,9 @@ namespace WebApi.Controllers
         public IActionResult GetById(int id)
         {
             MovieDetailViewModel result;
-            try
-            {
-                GetMoviesDetailQuery query = new GetMoviesDetailQuery(_context, _mapper);
-                query.MovieId = id;
-                result = query.Handle();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            GetMoviesDetailQuery query = new GetMoviesDetailQuery(_context, _mapper);
+            query.MovieId = id;
+            result = query.Handle();
 
             return Ok(result);
         }
@@ -58,15 +52,12 @@ namespace WebApi.Controllers
         public IActionResult AddMovie([FromBody] CreateMovieModel newMovie)
         {
             CreateMovieCommand command = new CreateMovieCommand(_context, _mapper);
-            try
-            {
-                command.Model = newMovie;
-                command.Handle();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            command.Model = newMovie;
+            CreateMovieCommandValidator validator = new CreateMovieCommandValidator();
+            validator.ValidateAndThrow(command);
+            command.Handle();
+
             return Ok();
 
         }
@@ -74,18 +65,12 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieModel updateMovie)
         {
-            try
-            {
-                UpdateMovieCommand command = new UpdateMovieCommand(_context);
-                command.MovieId = id;
-                command.Model = updateMovie;
-                command.Handle();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            UpdateMovieCommand command = new UpdateMovieCommand(_context);
+            command.MovieId = id;
+            command.Model = updateMovie;
+            UpdateMovieCommandValidator validator = new UpdateMovieCommandValidator();
+            validator.ValidateAndThrow(command);
+            command.Handle();
 
             return Ok();
         }
@@ -93,18 +78,12 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteMovie(int id)
         {
-            try
-            {
-                DeleteMovieCommand command = new DeleteMovieCommand(_context);
-                command.MovieId = id;
-                command.Handle();
-            }
-            catch (Exception ex)
-            {
+            DeleteMovieCommand command = new DeleteMovieCommand(_context);
+            command.MovieId = id;
+            DeleteMovieCommandValidator validator = new DeleteMovieCommandValidator();
+            validator.ValidateAndThrow(command);
+            command.Handle();
 
-                return BadRequest(ex.Message);
-            }
-            
             return Ok();
         }
     }

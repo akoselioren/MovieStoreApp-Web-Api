@@ -2,14 +2,14 @@
 using System;
 using WebApi.DbOperations;
 using Microsoft.EntityFrameworkCore;
- 
+using AutoMapper;
+
 namespace WebApi.MovieOperations.UpdateMovie
 {
     public class UpdateMovieCommand
     {
         private readonly MovieStoreDbContext _dbContext;
         public int MovieId {get; set;}
-
         public UpdateMovieModel Model { get; set;}
         public UpdateMovieCommand(MovieStoreDbContext dbContext)
         {
@@ -19,12 +19,12 @@ namespace WebApi.MovieOperations.UpdateMovie
         public void Handle()
         {
             var movie = _dbContext.Movies.SingleOrDefault(x => x.Id == MovieId);
+
             if (movie is null)
                 throw new InvalidOperationException("Güncellenecek Film'e ulaşılamadı.");
 
-            movie.GenreId = Model.GenreId != default ? Model.GenreId : movie.GenreId;
             movie.Title = Model.Title != default ? Model.Title : movie.Title;
-
+            movie.GenreId = Model.GenreId != default ? Model.GenreId : movie.GenreId;
             _dbContext.SaveChanges();
         }
 
