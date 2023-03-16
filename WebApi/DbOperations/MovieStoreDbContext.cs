@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApi.Entities;
 
 namespace WebApi.DbOperations
 {
@@ -7,5 +8,6 @@ namespace WebApi.DbOperations
         public MovieStoreDbContext(DbContextOptions<MovieStoreDbContext> options) : base(options)
         { }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }

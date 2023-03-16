@@ -2,15 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.MovieOperations.GetMovies;
 using WebApi.DbOperations;
 using AutoMapper;
+using WebApi.Entities;
 
-namespace WebApi.MovieOperations.CreateMovie
+namespace WebApi.Application.MovieOperations.Commands.CreateMovie
 {
     public class CreateMovieCommand
     {
-        public CreateMovieModel Model {get; set; }
+        public CreateMovieModel Model { get; set; }
         private readonly MovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public CreateMovieCommand(MovieStoreDbContext dbContext, IMapper mapper)
@@ -26,7 +26,7 @@ namespace WebApi.MovieOperations.CreateMovie
             if (movie is not null)
                 throw new InvalidOperationException("Film zaten mevcut");
 
-            movie=_mapper.Map<Movie>(Model);
+            movie = _mapper.Map<Movie>(Model);
 
             _dbContext.Movies.Add(movie);
             _dbContext.SaveChanges();

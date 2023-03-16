@@ -4,13 +4,13 @@ using WebApi.DbOperations;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
-namespace WebApi.MovieOperations.UpdateMovie
+namespace WebApi.Application.MovieOperations.Commands.UpdateMovie
 {
     public class UpdateMovieCommand
     {
         private readonly MovieStoreDbContext _dbContext;
-        public int MovieId {get; set;}
-        public UpdateMovieModel Model { get; set;}
+        public int MovieId { get; set; }
+        public UpdateMovieModel Model { get; set; }
         public UpdateMovieCommand(MovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;

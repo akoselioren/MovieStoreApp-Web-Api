@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.Common;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
-namespace WebApi.MovieOperations.GetMovies
+namespace WebApi.Application.MovieOperations.Queryies.GetMovies
 {
     public class GetMoviesQuery
     {
@@ -20,9 +21,9 @@ namespace WebApi.MovieOperations.GetMovies
 
         public List<MovieViewModel> Handle()
         {
-            var movieList = _dbContext.Movies.OrderBy(x => x.Id).ToList<Movie>();
-            
-            List<MovieViewModel> vm =_mapper.Map<List<MovieViewModel>>(movieList);
+            var movieList = _dbContext.Movies.Include(x=>x.Genre).OrderBy(x => x.Id).ToList();
+
+            List<MovieViewModel> vm = _mapper.Map<List<MovieViewModel>>(movieList);
             return vm;
         }
     }

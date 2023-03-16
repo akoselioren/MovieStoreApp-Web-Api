@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.MovieOperations.CreateMovie;
-using WebApi.MovieOperations.DeleteMovie;
-using WebApi.MovieOperations.GetMovies;
-using WebApi.MovieOperations.GetMovieDetail;
-using WebApi.MovieOperations.UpdateMovie;
 using WebApi.DbOperations;
-using static WebApi.MovieOperations.CreateMovie.CreateMovieCommand;
-using static WebApi.MovieOperations.UpdateMovie.UpdateMovieCommand;
+using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovieCommand;
+using static WebApi.Application.MovieOperations.Commands.UpdateMovie.UpdateMovieCommand;
 using FluentValidation.Results;
 using FluentValidation;
+using WebApi.Application.MovieOperations.Commands.CreateMovie;
+using WebApi.Application.MovieOperations.Commands.DeleteMovie;
+using WebApi.Application.MovieOperations.Commands.UpdateMovie;
+using WebApi.Application.MovieOperations.Queryies.GetMovies;
+using WebApi.Application.MovieOperations.Queryies.GetMovieDetail;
 
 namespace WebApi.Controllers
 {

@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
-
-namespace WebApi.MovieOperations.DeleteMovie
+namespace WebApi.Application.MovieOperations.Commands.DeleteMovie
 {
     public class DeleteMovieCommandValidator : AbstractValidator<DeleteMovieCommand>
     {

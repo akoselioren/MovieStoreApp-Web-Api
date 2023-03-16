@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Routing.Constraints;
-using WebApi.MovieOperations.GetMovieDetail;
-using WebApi.MovieOperations.GetMovies;
-using static WebApi.MovieOperations.CreateMovie.CreateMovieCommand;
-using static WebApi.MovieOperations.UpdateMovie.UpdateMovieCommand;
+using WebApi.Application.GenreOperations.Queryies.GetGenreDetail;
+using WebApi.Application.GenreOperations.Queryies.GetGenres;
+using WebApi.Application.MovieOperations.Queryies.GetMovieDetail;
+using WebApi.Application.MovieOperations.Queryies.GetMovies;
+using WebApi.Entities;
+using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovieCommand;
 
 namespace WebApi.Common
 {
@@ -12,8 +14,10 @@ namespace WebApi.Common
         public MappingProfile( )
         {
             CreateMap<CreateMovieModel, Movie>();
-            CreateMap<Movie, MovieDetailViewModel>().ForMember(dest =>dest.Genre, opt=>opt.MapFrom(src=>((GenreEnum)src.GenreId).ToString()));
-            CreateMap<Movie,MovieViewModel>().ForMember(dest => dest.Genre, opt => opt.MapFrom(src => ((GenreEnum)src.GenreId).ToString()));
+            CreateMap<Movie, MovieDetailViewModel>().ForMember(dest =>dest.Genre, opt=>opt.MapFrom(src=>src.Genre.Name));
+            CreateMap<Movie,MovieViewModel>().ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name));
+            CreateMap<Genre, GenresViewModel>();
+            CreateMap<Genre, GetGenreDetailViewModel>();
 
         }
     }

@@ -3,7 +3,7 @@ using System;
 using WebApi.DbOperations;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApi.MovieOperations.DeleteMovie
+namespace WebApi.Application.MovieOperations.Commands.DeleteMovie
 {
     public class DeleteMovieCommand
     {

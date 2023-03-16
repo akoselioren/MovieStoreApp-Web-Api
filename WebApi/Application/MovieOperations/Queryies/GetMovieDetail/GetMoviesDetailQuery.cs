@@ -5,7 +5,7 @@ using System.Linq;
 using WebApi.Common;
 using WebApi.DbOperations;
 
-namespace WebApi.MovieOperations.GetMovieDetail
+namespace WebApi.Application.MovieOperations.Queryies.GetMovieDetail
 {
     public class GetMoviesDetailQuery
     {
@@ -20,7 +20,7 @@ namespace WebApi.MovieOperations.GetMovieDetail
 
         public MovieDetailViewModel Handle()
         {
-            var movie = _dbContext.Movies.Where(movie => movie.Id == MovieId).SingleOrDefault();
+            var movie = _dbContext.Movies.Include(x=>x.Genre).Where(movie => movie.Id == MovieId).SingleOrDefault();
             if (movie is null)
                 throw new InvalidOperationException("Film bulunamadı.");
             MovieDetailViewModel vm = _mapper.Map<MovieDetailViewModel>(movie);

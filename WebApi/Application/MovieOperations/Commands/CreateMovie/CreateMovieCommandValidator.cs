@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System;
 
-namespace WebApi.MovieOperations.CreateMovie
+namespace WebApi.Application.MovieOperations.Commands.CreateMovie
 {
     public class CreateMovieCommandValidator : AbstractValidator<CreateMovieCommand>
     {
