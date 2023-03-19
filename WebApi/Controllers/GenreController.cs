@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.GenreOperations.Commands.CreateGenre;
 using WebApi.Application.GenreOperations.Commands.DeleteGenre;
 using WebApi.Application.GenreOperations.Commands.UpdateGenre;
-using WebApi.Application.GenreOperations.Queryies.GetGenreDetail;
-using WebApi.Application.GenreOperations.Queryies.GetGenres;
+using WebApi.Application.GenreOperations.Queries.GetGenreDetail;
+using WebApi.Application.GenreOperations.Queries.GetGenres;
 using WebApi.DbOperations;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]s")]
     [ApiController]
     public class GenreController : ControllerBase
     {

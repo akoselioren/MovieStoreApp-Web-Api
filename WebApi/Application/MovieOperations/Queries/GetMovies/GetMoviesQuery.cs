@@ -7,7 +7,7 @@ using WebApi.Common;
 using WebApi.DbOperations;
 using WebApi.Entities;
 
-namespace WebApi.Application.MovieOperations.Queryies.GetMovies
+namespace WebApi.Application.MovieOperations.Queries.GetMovies
 {
     public class GetMoviesQuery
     {

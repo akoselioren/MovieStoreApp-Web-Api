@@ -26,8 +26,6 @@ namespace WebApi.Application.GenreOperations.Commands.CreateGenre
             _dbContext.Genres.Add(genre);
             _dbContext.SaveChanges();
         }
-
-
     }
 
     public class CreateGenreModel

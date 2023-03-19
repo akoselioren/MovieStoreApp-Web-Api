@@ -32,8 +32,6 @@ namespace WebApi.Application.MovieOperations.Commands.UpdateMovie
         {
             public string Title { get; set; }
             public int GenreId { get; set; }
-            //public string RunningTime { get; set; }
-            //public DateTime PublicationDate { get; set; }
         }
     }
 }

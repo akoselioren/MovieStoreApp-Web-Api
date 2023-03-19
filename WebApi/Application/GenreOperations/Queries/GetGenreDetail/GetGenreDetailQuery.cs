@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.DbOperations;
 
-namespace WebApi.Application.GenreOperations.Queryies.GetGenreDetail
+namespace WebApi.Application.GenreOperations.Queries.GetGenreDetail
 {
     public class GetGenreDetailQuery
     {

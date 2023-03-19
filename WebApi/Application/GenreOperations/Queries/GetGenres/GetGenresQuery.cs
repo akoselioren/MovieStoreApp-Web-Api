@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.DbOperations;
 
-namespace WebApi.Application.GenreOperations.Queryies.GetGenres
+namespace WebApi.Application.GenreOperations.Queries.GetGenres
 {
     public class GetGenresQuery
     {

@@ -12,8 +12,8 @@ using FluentValidation;
 using WebApi.Application.MovieOperations.Commands.CreateMovie;
 using WebApi.Application.MovieOperations.Commands.DeleteMovie;
 using WebApi.Application.MovieOperations.Commands.UpdateMovie;
-using WebApi.Application.MovieOperations.Queryies.GetMovies;
-using WebApi.Application.MovieOperations.Queryies.GetMovieDetail;
+using WebApi.Application.MovieOperations.Queries.GetMovies;
+using WebApi.Application.MovieOperations.Queries.GetMovieDetail;
 
 namespace WebApi.Controllers
 {
