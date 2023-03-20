@@ -6,10 +6,10 @@ namespace WebApi.Application.OrderOperations.Commands.DeleteOrder
 {
     public class DeleteOrderCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int OrderId { get; set; }
 
-        public DeleteOrderCommand(MovieStoreDbContext dbContext)
+        public DeleteOrderCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

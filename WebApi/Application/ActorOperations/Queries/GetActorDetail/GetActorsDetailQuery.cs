@@ -8,11 +8,11 @@ namespace WebApi.Application.ActorOperations.Queries.GetActorDetail
 {
     public class GetActorsDetailQuery
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public int ActorId { get; set; }
 
-        public GetActorsDetailQuery(MovieStoreDbContext dbContext, IMapper mapper)
+        public GetActorsDetailQuery(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

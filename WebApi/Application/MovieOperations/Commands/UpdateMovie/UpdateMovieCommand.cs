@@ -8,10 +8,10 @@ namespace WebApi.Application.MovieOperations.Commands.UpdateMovie
 {
     public class UpdateMovieCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int MovieId { get; set; }
         public UpdateMovieModel Model { get; set; }
-        public UpdateMovieCommand(MovieStoreDbContext dbContext)
+        public UpdateMovieCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

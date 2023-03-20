@@ -8,9 +8,9 @@ namespace WebApi.Application.GenreOperations.Commands.CreateGenre
     public class CreateGenreCommand
     {
          public CreateGenreModel Model { get; set; }
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
 
-        public CreateGenreCommand(MovieStoreDbContext dbContext)
+        public CreateGenreCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

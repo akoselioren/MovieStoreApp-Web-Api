@@ -10,10 +10,10 @@ namespace WebApi.Application.CustomerOperations.Commands.CreateCustomer
     public class CreateCustomerCommand
     {
         public CreateCustomerModel Model { get; set; }
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public CreateCustomerCommand(MovieStoreDbContext dbContext, IMapper mapper)
+        public CreateCustomerCommand(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

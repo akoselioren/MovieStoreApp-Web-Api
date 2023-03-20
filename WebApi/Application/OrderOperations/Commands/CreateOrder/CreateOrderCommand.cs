@@ -9,10 +9,10 @@ namespace WebApi.Application.OrderOperations.Commands.CreateOrder
     public class CreateOrderCommand
     {
         public CreateOrderModel Model { get; set; }
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public CreateOrderCommand(MovieStoreDbContext dbContext, IMapper mapper)
+        public CreateOrderCommand(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

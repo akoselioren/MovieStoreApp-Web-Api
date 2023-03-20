@@ -8,9 +8,9 @@ namespace WebApi.Application.GenreOperations.Commands.DeleteGenre
     {
         public int GenreId { get; set; }
 
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
 
-        public DeleteGenreCommand(MovieStoreDbContext dbContext)
+        public DeleteGenreCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

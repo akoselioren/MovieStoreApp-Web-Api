@@ -13,10 +13,10 @@ namespace WebApi.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly MovieStoreDbContext _context;
+        private readonly IMovieStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public OrderController(MovieStoreDbContext context, IMapper mapper)
+        public OrderController(IMovieStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

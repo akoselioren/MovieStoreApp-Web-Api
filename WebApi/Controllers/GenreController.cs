@@ -15,10 +15,10 @@ namespace WebApi.Controllers
     [ApiController]
     public class GenreController : ControllerBase
     {
-        private readonly MovieStoreDbContext _context;
+        private readonly IMovieStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public GenreController(MovieStoreDbContext context, IMapper mapper)
+        public GenreController(IMovieStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

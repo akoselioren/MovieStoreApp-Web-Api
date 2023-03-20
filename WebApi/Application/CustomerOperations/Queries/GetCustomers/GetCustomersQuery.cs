@@ -9,10 +9,10 @@ namespace WebApi.Application.CustomerOperations.Queries.GetCustomers
 {
     public class GetCustomersQuery
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetCustomersQuery(MovieStoreDbContext dbContext, IMapper mapper)
+        public GetCustomersQuery(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

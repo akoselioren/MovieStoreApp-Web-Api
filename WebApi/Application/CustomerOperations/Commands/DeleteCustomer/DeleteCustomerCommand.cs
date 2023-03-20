@@ -6,10 +6,10 @@ namespace WebApi.Application.CustomerOperations.Commands.DeleteCustomer
 {
     public class DeleteCustomerCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int CustomerId { get; set; }
 
-        public DeleteCustomerCommand(MovieStoreDbContext dbContext)
+        public DeleteCustomerCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

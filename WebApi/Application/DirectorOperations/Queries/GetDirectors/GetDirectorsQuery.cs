@@ -8,10 +8,10 @@ namespace WebApi.Application.DirectorOperations.Queries.GetDirectors
 {
     public class GetDirectorsQuery
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetDirectorsQuery(MovieStoreDbContext dbContext, IMapper mapper)
+        public GetDirectorsQuery(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

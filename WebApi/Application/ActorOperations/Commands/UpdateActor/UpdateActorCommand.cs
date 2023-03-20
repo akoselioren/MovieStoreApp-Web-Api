@@ -6,11 +6,11 @@ namespace WebApi.Application.ActorOperations.Commands.UpdateActor
 {
     public class UpdateActorCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int ActorId { get; set; }
         public UpdateActorModel Model { get; set; }
 
-        public UpdateActorCommand(MovieStoreDbContext dbContext)
+        public UpdateActorCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

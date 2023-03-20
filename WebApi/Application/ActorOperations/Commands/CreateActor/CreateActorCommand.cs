@@ -10,10 +10,10 @@ namespace WebApi.Application.ActorOperations.Commands.CreateActor
     public class CreateActorCommand
     {
         public CreateActorModel Model { get; set; }
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public CreateActorCommand(MovieStoreDbContext dbContext, IMapper mapper)
+        public CreateActorCommand(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

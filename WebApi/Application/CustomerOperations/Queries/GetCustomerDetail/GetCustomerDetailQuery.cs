@@ -10,10 +10,10 @@ namespace WebApi.Application.CustomerOperations.Queries.GetCustomerDetail
 {
     public class GetCustomerDetailQuery
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public int CustomerId { get; set; }
-        public GetCustomerDetailQuery(MovieStoreDbContext dbContext, IMapper mapper)
+        public GetCustomerDetailQuery(IMovieStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

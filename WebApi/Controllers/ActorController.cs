@@ -16,10 +16,10 @@ namespace WebApi.Controllers
     [ApiController]
     public class ActorController : ControllerBase
     {
-        private readonly MovieStoreDbContext _context;
+        private readonly IMovieStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public ActorController(MovieStoreDbContext context, IMapper mapper)
+        public ActorController(IMovieStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

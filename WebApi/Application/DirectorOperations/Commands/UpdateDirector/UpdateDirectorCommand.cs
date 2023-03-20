@@ -6,11 +6,11 @@ namespace WebApi.Application.DirectorOperations.Commands.UpdateDirector
 {
     public class UpdateDirectorCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int DirectorId { get; set; }
         public UpdateDirectorModel Model { get; set; }
 
-        public UpdateDirectorCommand(MovieStoreDbContext dbContext)
+        public UpdateDirectorCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

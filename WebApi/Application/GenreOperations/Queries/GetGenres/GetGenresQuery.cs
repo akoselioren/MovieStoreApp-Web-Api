@@ -7,10 +7,10 @@ namespace WebApi.Application.GenreOperations.Queries.GetGenres
 {
     public class GetGenresQuery
     {
-        public readonly MovieStoreDbContext _context;
+        public readonly IMovieStoreDbContext _context;
         public readonly IMapper _mapper;
 
-        public GetGenresQuery(MovieStoreDbContext context, IMapper mapper)
+        public GetGenresQuery(IMovieStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

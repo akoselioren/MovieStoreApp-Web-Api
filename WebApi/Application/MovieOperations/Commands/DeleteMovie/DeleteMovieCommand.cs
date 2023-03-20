@@ -7,9 +7,9 @@ namespace WebApi.Application.MovieOperations.Commands.DeleteMovie
 {
     public class DeleteMovieCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int MovieId { get; set; }
-        public DeleteMovieCommand(MovieStoreDbContext dbContext)
+        public DeleteMovieCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

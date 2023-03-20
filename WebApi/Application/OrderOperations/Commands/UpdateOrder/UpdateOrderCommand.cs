@@ -7,11 +7,11 @@ namespace WebApi.Application.OrderOperations.Commands.UpdateOrder
 {
     public class UpdateOrderCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int OrderId { get; set; }
         public UpdateOrderModel Model { get; set; }
 
-        public UpdateOrderCommand(MovieStoreDbContext dbContext)
+        public UpdateOrderCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }

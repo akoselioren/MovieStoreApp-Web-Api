@@ -6,10 +6,10 @@ namespace WebApi.Application.DirectorOperations.Commands.DeleteDirector
 {
     public class DeleteDirectorCommand
     {
-        private readonly MovieStoreDbContext _dbContext;
+        private readonly IMovieStoreDbContext _dbContext;
         public int DirectorId { get; set; }
 
-        public DeleteDirectorCommand(MovieStoreDbContext dbContext)
+        public DeleteDirectorCommand(IMovieStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }
