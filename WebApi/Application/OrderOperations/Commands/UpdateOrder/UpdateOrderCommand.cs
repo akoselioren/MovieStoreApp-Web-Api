@@ -1,5 +1,4 @@
-﻿using static WebApi.Application.DirectorOperations.Commands.UpdateDirector.UpdateDirectorCommand;
-using WebApi.DbOperations;
+﻿using WebApi.DbOperations;
 using System.Linq;
 using System;
 

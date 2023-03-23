@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.OrderOperations.Queries.GetOrderDetail
 {
@@ -20,7 +21,7 @@ namespace WebApi.Application.OrderOperations.Queries.GetOrderDetail
 
         public OrderDetailViewModel Handle()
         {
-            var orders = _dbContext.Orders.Include(x => x.Id).Where(order => order.Id == OrderId).SingleOrDefault();
+            Order orders = _dbContext.Orders.Where(order => order.Id == OrderId).Include(movie => movie.Movie).Include(customer => customer.Customer).SingleOrDefault();
             if (orders is null)
                 throw new InvalidOperationException("Sipariş bulunamadı.");
 
@@ -34,6 +35,7 @@ namespace WebApi.Application.OrderOperations.Queries.GetOrderDetail
         public string Movie { get; set; }
         public string Customer { get; set; }
         public string Price { get; set; }
+        public DateTime OrderDate { get; set; }
     }
 }
 

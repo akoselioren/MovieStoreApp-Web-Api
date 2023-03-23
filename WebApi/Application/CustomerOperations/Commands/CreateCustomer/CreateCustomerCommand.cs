@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System;
-using WebApi.Application.GenreOperations.Commands.CreateGenre;
 using WebApi.DbOperations;
 using WebApi.Entities;
 using AutoMapper;
@@ -21,9 +20,9 @@ namespace WebApi.Application.CustomerOperations.Commands.CreateCustomer
 
         public void Handle()
         {
-            var customer = _dbContext.Customers.SingleOrDefault(x => x.PhoneNumber == Model.PhoneNumber);
+            Customer customer = _dbContext.Customers.SingleOrDefault(customer => customer.Email == Model.Email);
             if (customer is not null)
-                throw new InvalidOperationException("Bu müşteri'nin telefon numarası daha önceden sisteme kayıtlı.");
+                throw new InvalidOperationException("Bu müşteri'nin email adresi daha önceden sisteme kayıtlı.");
 
             customer = _mapper.Map<Customer>(Model);
 
@@ -34,10 +33,26 @@ namespace WebApi.Application.CustomerOperations.Commands.CreateCustomer
 
     public class CreateCustomerModel
     {
-        public int PayMovieId { get; set; }
-        public int FavoriteMovieId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
+        private string firstName;
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value.Trim(); }
+        }
+        private string lastName;
+
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value.Trim(); }
+        }
+
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set { email = value.Trim(); }
+        }
+        public string Password { get; set; }
     }
 }

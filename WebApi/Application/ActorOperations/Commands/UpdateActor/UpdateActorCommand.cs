@@ -22,17 +22,27 @@ namespace WebApi.Application.ActorOperations.Commands.UpdateActor
             if (actor is null)
                 throw new InvalidOperationException("Güncellenecek Actor'e ulaşılamadı.");
 
-            actor.FirstName = Model.FirstName != default ? Model.FirstName : actor.FirstName;
-            actor.LastName = Model.LastName != default ? Model.LastName : actor.LastName;
-            actor.CastMovieId = Model.CastMovieId != default ? Model.CastMovieId : actor.CastMovieId;
+            actor.FirstName = string.IsNullOrEmpty(Model.FirstName) ? actor.FirstName : Model.FirstName.Trim();
+            actor.LastName = string.IsNullOrEmpty(Model.LastName) ? actor.LastName : Model.LastName.Trim();
+
+
             _dbContext.SaveChanges();
         }
 
         public class UpdateActorModel
         {
-            public int CastMovieId { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
+            private string firstName;
+            public string FirstName
+            {
+                get { return firstName; }
+                set { firstName = value.Trim(); }
+            }
+            private string lastName;
+            public string LastName
+            {
+                get { return lastName; }
+                set { lastName = value.Trim(); }
+            }
         }
     }
 }

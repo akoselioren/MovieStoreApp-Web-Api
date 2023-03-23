@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApi.DbOperations;
+﻿using WebApi.DbOperations;
 using WebApi.Entities;
 
 namespace WebApi.UnitTests.TestSetup
@@ -12,37 +7,13 @@ namespace WebApi.UnitTests.TestSetup
     {
         public static void AddGenres(this MovieStoreDbContext context) 
         {
-            context.Genres.AddRange(
-                new Genre
-                {
-                    Name = "Romantik Komedi"
-                },
-                new Genre
-                {
-                    Name = "Komedi"
-                },
-                new Genre
-                {
-                    Name = "Bilim Kurgu"
-                },
-                new Genre
-                {
-                    Name = "Drama"
-                },
-                new Genre
-                {
-                    Name = "Aksiyon"
-                },
-                new Genre
-                {
-                    Name = "Korku"
-                },
-                new Genre
-                {
-                    Name = "Polisiye"
-                }
-
-                );
+            var genre1 = new Genre { Name = "Romantik Komedi" };
+            var genre2 = new Genre { Name = "Komedi" };
+            var genre3 = new Genre { Name = "Bilim Kurgu" };
+            var genre4 = new Genre { Name = "Dram" };
+            var genre5 = new Genre { Name = "Aksiyon" };
+            var genre6 = new Genre { Name = "Korku" };
+            var genre7 = new Genre { Name = "Polisiye" };
         }
     }
 }

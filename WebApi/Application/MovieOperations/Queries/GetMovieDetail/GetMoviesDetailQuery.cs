@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using WebApi.Common;
+using WebApi.Application.MovieOperations.Queries.Shared;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.MovieOperations.Queries.GetMovieDetail
 {
@@ -20,12 +22,12 @@ namespace WebApi.Application.MovieOperations.Queries.GetMovieDetail
 
         public MovieDetailViewModel Handle()
         {
-            var movie = _dbContext.Movies.Include(x=>x.Genre).Where(movie => movie.Id == MovieId).SingleOrDefault();
-            if (movie is null)
+            Movie movieList = _dbContext.Movies.Where(movie => movie.Id == MovieId && movie.IsActive).Include(movie => movie.Genre).Include(movie => movie.Director).Include(movie => movie.MovieActors).SingleOrDefault();
+                if (movieList is null)
                 throw new InvalidOperationException("Film bulunamadı.");
 
 
-            MovieDetailViewModel vm = _mapper.Map<MovieDetailViewModel>(movie);
+            MovieDetailViewModel vm = _mapper.Map<MovieDetailViewModel>(movieList);
             return vm;
         }
     }
@@ -33,8 +35,10 @@ namespace WebApi.Application.MovieOperations.Queries.GetMovieDetail
     public class MovieDetailViewModel
     {
         public string Title { get; set; }
+        public DateTime PublicationDate { get; set; }
         public string Genre { get; set; }
-        public string RunningTime { get; set; }
-        public string PublicationDate { get; set; }
+        public string Director { get; set; }
+        public int Price { get; set; }
+        public List<ActorsViewModel> MovieActors { get; set; }
     }
 }

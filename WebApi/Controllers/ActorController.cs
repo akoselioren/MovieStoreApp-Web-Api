@@ -12,8 +12,8 @@ using static WebApi.Application.ActorOperations.Commands.UpdateActor.UpdateActor
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]s")]
     [ApiController]
+    [Route("api/[controller]s")]
     public class ActorController : ControllerBase
     {
         private readonly IMovieStoreDbContext _context;
@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetActor()
+        public IActionResult GetActors()
         {
             GetActorsQuery query = new GetActorsQuery(_context, _mapper);
             var result = query.Handle();
@@ -36,15 +36,18 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            ActorDetailViewModel result;
-            GetActorsDetailQuery query = new GetActorsDetailQuery(_context, _mapper);
+            GetActorDetailQuery query = new GetActorDetailQuery(_context, _mapper);
             query.ActorId = id;
-            result = query.Handle();
+
+            GetActorDetailQueryValidator validator= new GetActorDetailQueryValidator();
+            validator.ValidateAndThrow(query);
+
+            ActorDetailViewModel result = query.Handle();
 
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult AddActor([FromBody] CreateActorModel newActor)
+        public IActionResult CreateActor([FromBody] CreateActorModel newActor)
         {
             CreateActorCommand command = new CreateActorCommand(_context, _mapper);
 

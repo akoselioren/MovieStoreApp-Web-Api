@@ -16,6 +16,10 @@ namespace WebApi.UnitTests.TestSetup
             Context.Database.EnsureCreated();
             Context.AddMovies();
             Context.AddGenres();
+            Context.AddDirectors();
+            Context.AddOrders();
+            Context.AddActors();
+            Context.AddCustomers();
             Context.SaveChanges();
 
             Mapper = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); }).CreateMapper();

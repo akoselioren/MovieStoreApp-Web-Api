@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using WebApi.DbOperations;
 using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovieCommand;
 using static WebApi.Application.MovieOperations.Commands.UpdateMovie.UpdateMovieCommand;
-using FluentValidation.Results;
 using FluentValidation;
 using WebApi.Application.MovieOperations.Commands.CreateMovie;
 using WebApi.Application.MovieOperations.Commands.DeleteMovie;
@@ -17,8 +12,8 @@ using WebApi.Application.MovieOperations.Queries.GetMovieDetail;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]s")]
     [ApiController]
+    [Route("api/[controller]s")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieStoreDbContext _context;
@@ -41,15 +36,17 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            MovieDetailViewModel result;
             GetMoviesDetailQuery query = new GetMoviesDetailQuery(_context, _mapper);
             query.MovieId = id;
-            result = query.Handle();
+            GetMoviesDetailQueryValidator validator = new GetMoviesDetailQueryValidator();
+            validator.ValidateAndThrow(query);
+
+            MovieDetailViewModel result = query.Handle();
 
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult AddMovie([FromBody] CreateMovieModel newMovie)
+        public IActionResult CreateMovie([FromBody] CreateMovieModel newMovie)
         {
             CreateMovieCommand command = new CreateMovieCommand(_context, _mapper);
 

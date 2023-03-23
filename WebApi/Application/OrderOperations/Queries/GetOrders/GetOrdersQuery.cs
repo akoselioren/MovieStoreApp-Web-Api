@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.OrderOperations.Queries.GetOrders
 {
@@ -19,9 +20,9 @@ namespace WebApi.Application.OrderOperations.Queries.GetOrders
 
         public List<OrderViewModel> Handle()
         {
-            var movieList = _dbContext.Orders.Include(x => x.MovieId).OrderBy(x => x.MovieId).ToList();
+            List<Order> orderList = _dbContext.Orders.Where(x => x.Id > 0).Include(movie => movie.Movie).Include(customer => customer.Customer).OrderBy(x => x.Id).ToList<Order>();
 
-            List<OrderViewModel> vm = _mapper.Map<List<OrderViewModel>>(movieList);
+            List<OrderViewModel> vm = _mapper.Map<List<OrderViewModel>>(orderList);
             return vm;
         }
     }

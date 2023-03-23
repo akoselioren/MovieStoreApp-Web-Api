@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using WebApi.Application.DirectorOperations.Queries.Shared;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.DirectorOperations.Queries.GetDirectorDetail
 {
@@ -20,7 +23,12 @@ namespace WebApi.Application.DirectorOperations.Queries.GetDirectorDetail
 
         public DirectorDetailViewModel Handle()
         {
-            var director = _dbContext.Directors.Include(x => x.Movie).Where(director => director.Id == DirectorId).SingleOrDefault();
+            Director director = _dbContext.Directors.Where(director => director.Id == DirectorId)
+      .Include(director => director.DirectedMovies.Where(movie => movie.IsActive))
+        .ThenInclude(movie => movie.Director)
+      .Include(director => director.DirectedMovies.Where(movie => movie.IsActive))
+        .ThenInclude(movie => movie.Genre)
+      .SingleOrDefault();
             if (director is null)
                 throw new InvalidOperationException("Director bulunamadı.");
 
@@ -32,8 +40,8 @@ namespace WebApi.Application.DirectorOperations.Queries.GetDirectorDetail
 
     public class DirectorDetailViewModel
     {
-        public string DirectedMovie { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<DirectedMovieViewModel> DirectedMovies { get; set; }
     }
 }

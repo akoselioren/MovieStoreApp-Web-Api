@@ -4,10 +4,11 @@ using WebApi.Entities;
 
 namespace WebApi.UnitTests.TestSetup
 {
-    public static class Movies
+    public static class Orders
     {
-        public static void AddMovies(this MovieStoreDbContext context)
+        public static void AddOrders(this MovieStoreDbContext context)
         {
+            #region data movie
             var movie1 = new Movie
             {
                 Title = "Ay Tutulması",
@@ -48,6 +49,13 @@ namespace WebApi.UnitTests.TestSetup
                 PublicationDate = new DateTime(2024, 08, 05),
                 Price = 75
             };
+            #endregion
+
+            var order1 = new Order { MovieId = 5, CustomerId = 1, Price = movie1.Price, OrderDate = new DateTime(2023, 01, 08) };
+            var order2 = new Order { MovieId = 4, CustomerId = 2, Price = movie2.Price, OrderDate = new DateTime(2023, 02, 10) };
+            var order3 = new Order { MovieId = 3, CustomerId = 3, Price = movie3.Price, OrderDate = new DateTime(2023, 03, 15) };
+            var order4 = new Order { MovieId = 2, CustomerId = 4, Price = movie4.Price, OrderDate = new DateTime(2023, 01, 22) };
+            var order5 = new Order { MovieId = 1, CustomerId = 5, Price = movie5.Price, OrderDate = new DateTime(2023, 03, 29) };
         }
     }
 }

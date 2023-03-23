@@ -20,7 +20,7 @@ namespace WebApi.Application.MovieOperations.Commands.DeleteMovie
             if (movie is null)
                 throw new InvalidOperationException("Silnecek Film bulunamadı.");
 
-            _dbContext.Movies.Remove(movie);
+            movie.IsActive= false;
             _dbContext.SaveChanges();
         }
 

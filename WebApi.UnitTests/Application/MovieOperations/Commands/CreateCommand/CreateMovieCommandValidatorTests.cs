@@ -17,20 +17,21 @@ namespace WebApi.UnitTests.Application.MovieOperations.Commands.CreateCommand
     public class CreateMovieCommandTestsValidatorTests : IClassFixture<CommonTestFixture>
     {
         [Theory]
-        [InlineData("Lord ",0, "")]
-        [InlineData("Lord Of",0, "")]
-        [InlineData("Lord Of The",0, "01:25:05")]
-        [InlineData("Lord Of The Rings",0, "")]
-        [InlineData("Lord Of The Ringse",0, "01:25:55")]
-        public void WhenInvalidInputsAreGiven_Validator_ShouldBeReturnErrors(string title,int GenreId, string RunningTime)
+        [InlineData("Lord ",0,2, 50)]
+        [InlineData("Lord Of",0,3,45)]
+        [InlineData("Lord Of The",0,5,75)]
+        [InlineData("Lord Of The Ringse",0,2,85)]
+        [InlineData("Lord Of The Ringsel",0,1,95)]
+        public void WhenInvalidInputsAreGiven_Validator_ShouldBeReturnErrors(string Title,int GenreId,int DirectorId, int Price)
         {   //Arrange
             CreateMovieCommand command = new CreateMovieCommand(null, null);
             command.Model = new CreateMovieModel()
             {
-                Title = title,
+                Title = Title,
                 GenreId = GenreId,
-                RunningTime = RunningTime,
-                PublicationDate = new DateTime(2001, 06, 12)
+                DirectorId=DirectorId,
+                PublicationDate = new DateTime(2001, 06, 12),
+                Price = Price
             };
             //Act
             CreateMovieCommandValidator validator = new CreateMovieCommandValidator();
@@ -47,7 +48,7 @@ namespace WebApi.UnitTests.Application.MovieOperations.Commands.CreateCommand
             {
                 Title = "Lord Of The Rings",
                 GenreId = 2,
-                RunningTime = "02:05:00",
+                DirectorId=1,
                 PublicationDate = DateTime.Now.Date
             };
             CreateMovieCommandValidator validator= new CreateMovieCommandValidator();
@@ -64,7 +65,7 @@ namespace WebApi.UnitTests.Application.MovieOperations.Commands.CreateCommand
             {
                 Title = "Lord Of The Rings",
                 GenreId = 2,
-                RunningTime = "02:05:00",
+                DirectorId = 1,
                 PublicationDate = DateTime.Now.Date.AddYears(-2)
             };
             CreateMovieCommandValidator validator = new CreateMovieCommandValidator();

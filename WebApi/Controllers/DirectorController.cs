@@ -12,8 +12,8 @@ using static WebApi.Application.DirectorOperations.Commands.UpdateDirector.Updat
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]s")]
     [ApiController]
+    [Route("api/[controller]s")]
     public class DirectorController : ControllerBase
     {
         private readonly IMovieStoreDbContext _context;
@@ -37,15 +37,17 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            DirectorDetailViewModel result;
             GetDirectorsDetailQuery query = new GetDirectorsDetailQuery(_context, _mapper);
             query.DirectorId = id;
-            result = query.Handle();
+
+            GetDirectorsDetailQueryValidator validator= new GetDirectorsDetailQueryValidator();
+            validator.ValidateAndThrow(query);
+            DirectorDetailViewModel result = query.Handle();
 
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult AddDirector([FromBody] CreateDirectorModel newDirector)
+        public IActionResult CreateDirector([FromBody] CreateDirectorModel newDirector)
         {
             CreateDirectorCommand command = new CreateDirectorCommand(_context, _mapper);
 

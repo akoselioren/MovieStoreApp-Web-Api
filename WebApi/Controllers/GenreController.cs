@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.GenreOperations.Commands.CreateGenre;
 using WebApi.Application.GenreOperations.Commands.DeleteGenre;
@@ -11,8 +10,8 @@ using WebApi.DbOperations;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]s")]
     [ApiController]
+    [Route("api/[controller]s")]
     public class GenreController : ControllerBase
     {
         private readonly IMovieStoreDbContext _context;
@@ -28,8 +27,8 @@ namespace WebApi.Controllers
         public ActionResult GetGenres()
         {
             GetGenresQuery query = new GetGenresQuery(_context, _mapper);
-            var obj = query.Handle();
-            return Ok(obj);
+            var result = query.Handle();
+            return Ok(result);
         }
 
         [HttpGet("id")]
@@ -40,12 +39,12 @@ namespace WebApi.Controllers
             GetGenreDetailQueryValidator validator = new GetGenreDetailQueryValidator();
             validator.ValidateAndThrow(query);
 
-            var obj = query.Handle();
-            return Ok(obj);
+            var result = query.Handle();
+            return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult AddGenre([FromBody] CreateGenreModel newGenre)
+        public IActionResult CreateGenre([FromBody] CreateGenreModel newGenre)
         {
             CreateGenreCommand command = new CreateGenreCommand(_context);
             command.Model = newGenre;

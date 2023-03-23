@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Application.ActorOperations.Queries.Shared;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.ActorOperations.Queries.GetActors
 {
@@ -18,17 +20,25 @@ namespace WebApi.Application.ActorOperations.Queries.GetActors
         }
         public List<ActorViewModel> Handle()
         {
-            var actorList = _dbContext.Actors.Include(x => x.Movie).OrderBy(x => x.Id).ToList();
+            List<Actor> actorList = _dbContext.Actors
+      .Include(actor => actor.ActorMovies.Where(movie => movie.IsActive))
+        .ThenInclude(movie => movie.Director)
+      .Include(actor => actor.ActorMovies.Where(movie => movie.IsActive))
+        .ThenInclude(movie => movie.Genre)
+      .OrderBy(actor => actor.Id)
+      .ToList<Actor>();
 
-            List<ActorViewModel> vm = _mapper.Map<List<ActorViewModel>>(actorList);
-            return vm;
+            List<ActorViewModel> ActorVm = _mapper.Map<List<ActorViewModel>>(actorList);
+            return ActorVm;
         }
     }
 
     public class ActorViewModel
     {
-        public string CastMovie { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<ActedInMovieViewModel> ActorMovies { get; set; }
+
     }
+
 }

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using WebApi.Application.ActorOperations.Commands.DeleteActor;
 
 namespace WebApi.Application.DirectorOperations.Commands.DeleteDirector
 {

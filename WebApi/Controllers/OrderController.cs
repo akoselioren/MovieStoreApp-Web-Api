@@ -3,9 +3,11 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.OrderOperations.Commands.CreateOrder;
 using WebApi.Application.OrderOperations.Commands.DeleteOrder;
+using WebApi.Application.OrderOperations.Commands.UpdateOrder;
 using WebApi.Application.OrderOperations.Queries.GetOrderDetail;
 using WebApi.Application.OrderOperations.Queries.GetOrders;
 using WebApi.DbOperations;
+using static WebApi.Application.OrderOperations.Commands.UpdateOrder.UpdateOrderCommand;
 
 namespace WebApi.Controllers
 {
@@ -33,15 +35,17 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            OrderDetailViewModel result;
             GetOrderDetailQuery query = new GetOrderDetailQuery(_context, _mapper);
             query.OrderId = id;
-            result = query.Handle();
+
+            GetOrderDetailQueryValidator validator= new GetOrderDetailQueryValidator();
+            validator.ValidateAndThrow(query);
+            OrderDetailViewModel result = query.Handle();
 
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult AddMovie([FromBody] CreateOrderModel newOrder)
+        public IActionResult CreateMovie([FromBody] CreateOrderModel newOrder)
         {
             CreateOrderCommand command = new CreateOrderCommand(_context, _mapper);
 
@@ -53,6 +57,22 @@ namespace WebApi.Controllers
             return Ok();
 
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrder(int id, [FromBody] UpdateOrderModel updateOrder)
+        {
+            UpdateOrderCommand command = new UpdateOrderCommand(_context);
+            command.OrderId = id;
+            command.Model = updateOrder;
+
+            UpdateOrderCommandValidator validator = new UpdateOrderCommandValidator();
+            validator.ValidateAndThrow(command);
+
+            command.Handle();
+            return Ok();
+
+        }
+
 
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)

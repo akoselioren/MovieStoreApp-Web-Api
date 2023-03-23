@@ -9,8 +9,8 @@ using WebApi.DbOperations;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]s")]
     [ApiController]
+    [Route("api/[controller]s")]
     public class CustomerController : ControllerBase
     {
         private readonly IMovieStoreDbContext _context;
@@ -33,15 +33,17 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            CustomerDetailViewModel result;
             GetCustomerDetailQuery query = new GetCustomerDetailQuery(_context, _mapper);
             query.CustomerId = id;
-            result = query.Handle();
+
+            GetCustomerDetailQueryValidator validator= new GetCustomerDetailQueryValidator();
+            validator.ValidateAndThrow(query);
+            CustomerDetailViewModel result = query.Handle();
 
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult AddMovie([FromBody] CreateCustomerModel newCustomer)
+        public IActionResult CreateMovie([FromBody] CreateCustomerModel newCustomer)
         {
             CreateCustomerCommand command = new CreateCustomerCommand(_context, _mapper);
 

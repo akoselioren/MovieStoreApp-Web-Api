@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using static WebApi.Application.MovieOperations.Commands.CreateMovie.CreateMovieCommand;
 using WebApi.DbOperations;
 using System.Linq;
 using System;
@@ -21,7 +20,7 @@ namespace WebApi.Application.ActorOperations.Commands.CreateActor
 
         public void Handle()
         {
-            var actor = _dbContext.Actors.SingleOrDefault(x => x.FirstName == Model.FirstName && x.LastName==Model.LastName);
+            Actor actor = _dbContext.Actors.SingleOrDefault(actor => (actor.FirstName.ToLower() == Model.FirstName.ToLower() && actor.LastName.ToLower() == Model.LastName.ToLower()));
 
             if (actor is not null)
                 throw new InvalidOperationException("Eklemek istediğiniz Actor zaten mevcut");
@@ -34,9 +33,18 @@ namespace WebApi.Application.ActorOperations.Commands.CreateActor
 
         public class CreateActorModel
         {
-            public int CastMovieId { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
+            private string firstName;
+            public string FirstName
+            {
+                get { return firstName; }
+                set { firstName = value.Trim(); }
+            }
+            private string lastName;
+            public string LastName
+            {
+                get { return lastName; }
+                set { lastName = value.Trim(); }
+            }
         }
     }
 }

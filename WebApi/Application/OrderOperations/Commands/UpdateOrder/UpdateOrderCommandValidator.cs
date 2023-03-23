@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using WebApi.Application.DirectorOperations.Commands.UpdateDirector;
 
 namespace WebApi.Application.OrderOperations.Commands.UpdateOrder
 {

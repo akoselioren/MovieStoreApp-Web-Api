@@ -20,6 +20,8 @@ namespace WebApi.Application.ActorOperations.Commands.DeleteActor
             if (actor is null)
                 throw new InvalidOperationException("Silnecek Actor bulunamadı.");
 
+
+
             _dbContext.Actors.Remove(actor);
             _dbContext.SaveChanges();
         }

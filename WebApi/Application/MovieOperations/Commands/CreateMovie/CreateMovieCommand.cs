@@ -34,10 +34,16 @@ namespace WebApi.Application.MovieOperations.Commands.CreateMovie
 
         public class CreateMovieModel
         {
-            public string Title { get; set; }
+            private string title;
+            public string Title
+            {
+                get { return title; }
+                set { title = value.Trim(); }
+            }
             public int GenreId { get; set; }
-            public string RunningTime { get; set; }
+            public int DirectorId { get; set; }
             public DateTime PublicationDate { get; set; }
+            public int Price { get; set; }
         }
     }
 }

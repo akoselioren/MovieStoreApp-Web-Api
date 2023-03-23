@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System;
 using WebApi.DbOperations;
+using Microsoft.EntityFrameworkCore;
+using WebApi.Entities;
 
 namespace WebApi.Application.CustomerOperations.Commands.DeleteCustomer
 {
@@ -16,7 +18,7 @@ namespace WebApi.Application.CustomerOperations.Commands.DeleteCustomer
 
         public void Handle()
         {
-            var customer = _dbContext.Customers.SingleOrDefault(x => x.Id == CustomerId);
+            Customer customer = _dbContext.Customers.Include(customer => customer.Orders).SingleOrDefault(customer => customer.Id == CustomerId);
             if (customer is null)
                 throw new InvalidOperationException("Silnecek Müşteri bulunamadı.");
 

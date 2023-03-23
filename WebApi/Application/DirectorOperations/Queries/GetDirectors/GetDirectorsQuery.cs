@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Application.DirectorOperations.Queries.Shared;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.DirectorOperations.Queries.GetDirectors
 {
@@ -19,7 +21,8 @@ namespace WebApi.Application.DirectorOperations.Queries.GetDirectors
 
         public List<DirectorViewModel> Handle()
         {
-            var directorList = _dbContext.Directors.Include(x => x.Movie).OrderBy(x => x.DirectedMovieId).ToList();
+            List<Director> directorList = _dbContext.Directors.Include(director => director.DirectedMovies.Where(movie => movie.IsActive)).ThenInclude(movie => movie.Genre).OrderBy(director => director.Id).ToList<Director>();
+
 
             List<DirectorViewModel> vm = _mapper.Map<List<DirectorViewModel>>(directorList);
             return vm;
@@ -28,8 +31,9 @@ namespace WebApi.Application.DirectorOperations.Queries.GetDirectors
 
     public class DirectorViewModel
     {
-        public string DirectedMovie { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<DirectedMovieViewModel> DirectedMovies { get; set; }
     }
+    
 }

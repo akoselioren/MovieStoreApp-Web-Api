@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.Common;
+using WebApi.Application.MovieOperations.Queries.Shared;
 using WebApi.DbOperations;
 using WebApi.Entities;
 
@@ -21,7 +21,7 @@ namespace WebApi.Application.MovieOperations.Queries.GetMovies
 
         public List<MovieViewModel> Handle()
         {
-            var movieList = _dbContext.Movies.Include(x=>x.Genre).OrderBy(x => x.Id).ToList();
+            List<Movie> movieList = _dbContext.Movies.Where(movie => movie.IsActive).Include(movie => movie.Director).Include(movie => movie.MovieActors).Include(movie => movie.Genre).OrderBy(movie => movie.Id).ToList<Movie>();
 
             List<MovieViewModel> vm = _mapper.Map<List<MovieViewModel>>(movieList);
             return vm;
@@ -31,8 +31,12 @@ namespace WebApi.Application.MovieOperations.Queries.GetMovies
     public class MovieViewModel
     {
         public string Title { get; set; }
+        public DateTime PublicationDate { get; set; }
         public string Genre { get; set; }
-        public string RunningTime { get; set; }
-        public string PublicationDate { get; set; }
+        public string Director { get; set; }
+        public int Price { get; set; }
+        public List<ActorsViewModel> MovieActors { get; set; }
     }
+
+   
 }

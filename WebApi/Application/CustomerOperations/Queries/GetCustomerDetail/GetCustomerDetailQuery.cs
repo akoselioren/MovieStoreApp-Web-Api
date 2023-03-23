@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.Application.CustomerOperations.Queries.GetCustomers;
+using WebApi.Application.GenreOperations.Queries.GetGenres;
+using WebApi.Application.OrderOperations.Queries.GetOrders;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.Application.CustomerOperations.Queries.GetCustomerDetail
 {
@@ -21,22 +23,21 @@ namespace WebApi.Application.CustomerOperations.Queries.GetCustomerDetail
 
         public CustomerDetailViewModel Handle()
         {
-            var movie = _dbContext.Customers.Include(x => x.Order).Where(customer => customer.Id == CustomerId).SingleOrDefault();
-            if (movie is null)
+            Customer customer = _dbContext.Customers.Where(customer => customer.Id == CustomerId).Include(customer => customer.FavoriteGenres).Include(customer => customer.Orders).ThenInclude(order => order.Movie).SingleOrDefault();
+            if (customer is null)
                 throw new InvalidOperationException("Müşteri bulunamadı.");
 
-            CustomerDetailViewModel vm = _mapper.Map<CustomerDetailViewModel>(movie);
+            CustomerDetailViewModel vm = _mapper.Map<CustomerDetailViewModel>(customer);
             return vm;
         }
     }
 
     public class CustomerDetailViewModel
     {
-        public string FavoriteMovie { get; set; }
-        public string Order { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
+        public List<OrderViewModel> Orders { get; set; }
+        public List<GenresViewModel> FavoriteGenres { get; set; }
     }
-
 }
+

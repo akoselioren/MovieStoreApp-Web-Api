@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Application.GenreOperations.Queries.GetGenres;
+using WebApi.Application.OrderOperations.Queries.GetOrders;
 using WebApi.DbOperations;
 using WebApi.Entities;
 
@@ -20,7 +22,7 @@ namespace WebApi.Application.CustomerOperations.Queries.GetCustomers
 
         public List<CustomerViewModel> Handle()
         {
-            var customerList = _dbContext.Customers.Include(x => x.Movie).OrderBy(x => x.Id).ToList();
+            List<Customer> customerList = _dbContext.Customers.Include(customer => customer.Orders).ThenInclude(order => order.Movie).Include(customer => customer.FavoriteGenres).OrderBy(customer => customer.Id).ToList<Customer>();
 
             List<CustomerViewModel> vm = _mapper.Map<List<CustomerViewModel>>(customerList);
             return vm;
@@ -29,10 +31,10 @@ namespace WebApi.Application.CustomerOperations.Queries.GetCustomers
 
     public class CustomerViewModel
     {
-        public string FavoriteMovie { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
+        public List<OrderViewModel> Orders { get; set; }
+        public List<GenresViewModel> FavoriteGenres { get; set; }
     }
 
 }

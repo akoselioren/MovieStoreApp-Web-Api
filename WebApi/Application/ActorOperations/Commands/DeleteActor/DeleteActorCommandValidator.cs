@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using WebApi.Application.MovieOperations.Commands.DeleteMovie;
 
 namespace WebApi.Application.ActorOperations.Commands.DeleteActor
 {
