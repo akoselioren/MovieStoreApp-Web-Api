@@ -23,7 +23,7 @@ namespace WebApi.Application.DirectorOperations.Commands.CreateDirector
             var director = _dbContext.Directors.SingleOrDefault(x => x.FirstName == Model.FirstName && x.LastName == Model.LastName);
 
             if (director is not null)
-                throw new InvalidOperationException("Eklemek istediğiniz Director zaten mevcut");
+                throw new InvalidOperationException("Eklemek istediğiniz Yönetmen zaten mevcut");
 
             director = _mapper.Map<Director>(Model);
 

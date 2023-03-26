@@ -71,7 +71,5 @@ namespace WebApi.UnitTests.Application.MovieOperations.Commands.CreateCommand
             movie.PublicationDate.Should().Be(model.PublicationDate);
             movie.Price.Should().Be(model.Price);
         }
-
-
     }
 }

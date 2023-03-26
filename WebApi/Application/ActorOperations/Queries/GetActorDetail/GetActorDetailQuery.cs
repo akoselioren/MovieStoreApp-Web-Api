@@ -30,7 +30,7 @@ namespace WebApi.Application.ActorOperations.Queries.GetActorDetail
        .ThenInclude(movie => movie.Genre)
      .SingleOrDefault();
             if (actor is null)
-                throw new InvalidOperationException("Actor bulunamadı.");
+                throw new InvalidOperationException("Oyuncu bulunamadı.");
 
 
             ActorDetailViewModel vm = _mapper.Map<ActorDetailViewModel>(actor);

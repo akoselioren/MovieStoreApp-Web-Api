@@ -19,7 +19,7 @@ namespace WebApi.Application.DirectorOperations.Commands.DeleteDirector
         {
             var director = _dbContext.Directors.SingleOrDefault(x => x.Id == DirectorId);
             if (director is null)
-                throw new InvalidOperationException("Silnecek Director bulunamadı.");
+                throw new InvalidOperationException("Silnecek Yönetici bulunamadı.");
 
             bool isDirectingAnyMovie = _dbContext.Movies.Include(movie => movie.Director).Any(movie => movie.IsActive && movie.Director.Id == director.Id);
 

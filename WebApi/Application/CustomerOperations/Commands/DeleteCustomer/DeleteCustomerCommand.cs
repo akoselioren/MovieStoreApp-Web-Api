@@ -3,6 +3,7 @@ using System;
 using WebApi.DbOperations;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApi.Application.CustomerOperations.Commands.DeleteCustomer
 {
@@ -11,7 +12,7 @@ namespace WebApi.Application.CustomerOperations.Commands.DeleteCustomer
         private readonly IMovieStoreDbContext _dbContext;
         public int CustomerId { get; set; }
 
-        public DeleteCustomerCommand(IMovieStoreDbContext dbContext)
+        public DeleteCustomerCommand(IMovieStoreDbContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
         }

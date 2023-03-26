@@ -23,7 +23,7 @@ namespace WebApi.Application.ActorOperations.Commands.CreateActor
             Actor actor = _dbContext.Actors.SingleOrDefault(actor => (actor.FirstName.ToLower() == Model.FirstName.ToLower() && actor.LastName.ToLower() == Model.LastName.ToLower()));
 
             if (actor is not null)
-                throw new InvalidOperationException("Eklemek istediğiniz Actor zaten mevcut");
+                throw new InvalidOperationException("Eklemek istediğiniz Oyuncu zaten mevcut");
 
             actor = _mapper.Map<Actor>(Model);
 

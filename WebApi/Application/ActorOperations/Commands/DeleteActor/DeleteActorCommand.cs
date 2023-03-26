@@ -18,7 +18,7 @@ namespace WebApi.Application.ActorOperations.Commands.DeleteActor
         {
             var actor = _dbContext.Actors.SingleOrDefault(x => x.Id == ActorId);
             if (actor is null)
-                throw new InvalidOperationException("Silnecek Actor bulunamadı.");
+                throw new InvalidOperationException("Silnecek Oyuncu bulunamadı.");
 
 
 

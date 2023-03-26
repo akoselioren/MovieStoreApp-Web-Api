@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.CustomerOperations.Commands.CreateCustomer;
 using WebApi.Application.CustomerOperations.Commands.DeleteCustomer;
@@ -15,11 +16,13 @@ namespace WebApi.Controllers
     {
         private readonly IMovieStoreDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CustomerController(IMovieStoreDbContext context, IMapper mapper)
+        public CustomerController(IMovieStoreDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -59,7 +62,7 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteCustomer(int id)
         {
-            DeleteCustomerCommand command = new DeleteCustomerCommand(_context);
+            DeleteCustomerCommand command = new DeleteCustomerCommand(_context, _httpContextAccessor);
             command.CustomerId = id;
             DeleteCustomerCommandValidator validator = new DeleteCustomerCommandValidator();
             validator.ValidateAndThrow(command);

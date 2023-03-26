@@ -20,7 +20,7 @@ namespace WebApi.Application.DirectorOperations.Commands.UpdateDirector
             var director = _dbContext.Directors.SingleOrDefault(x => x.Id == DirectorId);
 
             if (director is null)
-                throw new InvalidOperationException("Güncellenecek Director'e ulaşılamadı.");
+                throw new InvalidOperationException("Güncellenecek Yönetmen'e ulaşılamadı.");
 
             director.FirstName = string.IsNullOrEmpty(Model.FirstName) ? director.FirstName : Model.FirstName.Trim();
             director.LastName = string.IsNullOrEmpty(Model.LastName) ? director.LastName : Model.LastName.Trim();

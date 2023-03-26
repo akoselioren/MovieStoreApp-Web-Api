@@ -30,7 +30,7 @@ namespace WebApi.Application.DirectorOperations.Queries.GetDirectorDetail
         .ThenInclude(movie => movie.Genre)
       .SingleOrDefault();
             if (director is null)
-                throw new InvalidOperationException("Director bulunamadı.");
+                throw new InvalidOperationException("Yönetmen bulunamadı.");
 
 
             DirectorDetailViewModel vm = _mapper.Map<DirectorDetailViewModel>(director);

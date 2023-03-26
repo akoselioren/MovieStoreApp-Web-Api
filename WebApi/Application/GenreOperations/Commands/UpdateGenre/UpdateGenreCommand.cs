@@ -17,7 +17,7 @@ namespace WebApi.Application.GenreOperations.Commands.UpdateGenre
         }
 
 
-        public void Handdle()
+        public void Handle()
         {
             var genre = _dbContext.Genres.SingleOrDefault(x => x.Id == GenreId);
             if (genre is null)

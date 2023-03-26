@@ -66,7 +66,7 @@ namespace WebApi.Controllers
             UpdateGenreCommandValidator validator = new UpdateGenreCommandValidator();
             validator.ValidateAndThrow(command);
 
-            command.Handdle();
+            command.Handle();
             return Ok();
         }
 
