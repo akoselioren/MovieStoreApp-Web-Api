@@ -2,11 +2,19 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using WebApi.Application.CustomerOperations.Commands.CreateCustomer;
+using WebApi.Application.CustomerOperations.Commands.CreateToken;
 using WebApi.Application.CustomerOperations.Commands.DeleteCustomer;
+using WebApi.Application.CustomerOperations.Commands.RefreshToken;
 using WebApi.Application.CustomerOperations.Queries.GetCustomerDetail;
 using WebApi.Application.CustomerOperations.Queries.GetCustomers;
 using WebApi.DbOperations;
+using WebApi.TokenOperations.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+
+
 
 namespace WebApi.Controllers
 {
@@ -16,12 +24,14 @@ namespace WebApi.Controllers
     {
         private readonly IMovieStoreDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CustomerController(IMovieStoreDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public CustomerController(IMovieStoreDbContext context, IMapper mapper, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
+            _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -29,7 +39,7 @@ namespace WebApi.Controllers
         public IActionResult GetCustomer()
         {
             GetCustomersQuery query = new GetCustomersQuery(_context, _mapper);
-            var result = query.Handle();
+            List<CustomerViewModel> result = query.Handle();
             return Ok(result);
         }
 
@@ -46,7 +56,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult CreateMovie([FromBody] CreateCustomerModel newCustomer)
+        public IActionResult CreateCustomer([FromBody] CreateCustomerModel newCustomer)
         {
             CreateCustomerCommand command = new CreateCustomerCommand(_context, _mapper);
 
@@ -59,11 +69,35 @@ namespace WebApi.Controllers
 
         }
 
+        [HttpPost("connect/token")]
+        public ActionResult<Token> CreateToken([FromBody] LoginModel loginInfo)
+        {
+            CreateTokenCommand command = new CreateTokenCommand( _context, _configuration);
+            command.Model = loginInfo;
+
+            CreateTokenCommandValidator validator = new CreateTokenCommandValidator();
+            validator.ValidateAndThrow(command);
+
+            Token token = command.Handle();
+
+            return token;
+        }
+
+        [HttpGet("refreshToken")]
+        public ActionResult<Token> RefreshToken([FromQuery] string token)
+        {
+            RefreshTokenCommand command = new RefreshTokenCommand(_context, _configuration);
+            command.RefreshToken = token;
+            Token resultAccessToken = command.Handle();
+            return resultAccessToken;
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteCustomer(int id)
         {
             DeleteCustomerCommand command = new DeleteCustomerCommand(_context, _httpContextAccessor);
             command.CustomerId = id;
+
             DeleteCustomerCommandValidator validator = new DeleteCustomerCommandValidator();
             validator.ValidateAndThrow(command);
             command.Handle();

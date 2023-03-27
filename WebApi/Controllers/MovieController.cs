@@ -9,9 +9,11 @@ using WebApi.Application.MovieOperations.Commands.DeleteMovie;
 using WebApi.Application.MovieOperations.Commands.UpdateMovie;
 using WebApi.Application.MovieOperations.Queries.GetMovies;
 using WebApi.Application.MovieOperations.Queries.GetMovieDetail;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]s")]
     public class MovieController : ControllerBase
