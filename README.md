@@ -3,9 +3,6 @@
 .NET Core ile MovieStore Web API'si geliştirdim. Veritabanı olarak In Memory kullandım ve XUnit test ile testlerini yazdım.
 Detaylı bir şekilde aşşağıda görseller ile destekleyerek projenin açıklaması bulunmaktadır.
 </br>
-</br>
-Patika Academy'deki <a href="https://academy.patika.dev/courses/net-core">link</a> kurstan faydalanarak oradaki Book Store projesinin farklı bir versiyonu olan Movie Store'yi yaparak
-kendimi geliştirdim.
 
 <h2 align="left">- Kullanıdığım araçlar ve yöntemler</h1>
 <p>• Entity Framework </p>
@@ -137,6 +134,9 @@ kendimi geliştirdim.
 <p>◉ Swashbuckle.AspNetCore </p>
 <p>◉ xunit </p>
 </br>
+
+<p>Patika Academy'deki <a href="https://academy.patika.dev/courses/net-core">link</a> kurstan faydalanarak oradaki Book Store projesinin farklı bir versiyonu olan Movie Store'yi yaparak
+kendimi geliştirdim.</p>
 
 <h2 align="center">🌟Proje'yi Yıldızlayıp(⭐) bana destekte bulunabilirsiniz..🌟</h5>
 
