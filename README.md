@@ -1,6 +1,6 @@
 <h1 align="center">🌟 MovieStoreApp( Web API ) 🌟</h1>
 </br>
-.NET Core ile MovieStore Web API'si geliştirdim. Veritabanı olarak In Memory kullandım ve XUnit test ile testlerini yazdım.
+.NET Core ile MovieStore Web API'sini geliştirdim. Veritabanı olarak In Memory kullandım ve XUnit test ile testlerini yazdım.
 Detaylı bir şekilde aşşağıda görseller ile destekleyerek projenin açıklaması bulunmaktadır.
 </br>
 
@@ -12,7 +12,6 @@ Detaylı bir şekilde aşşağıda görseller ile destekleyerek projenin açıkl
 <p>• Fluent Validation Kullanarak Modellerin Doğrulanması</p>
 <p>• Custom Exception Middleware</p>
 <p>• Projeye DI Container Kullanarak Logger Servis Eklemek</p>
-<p>• TDD (Test Driven Development)</p>
 <p>• Token Bazlı Kimlik Doğrulama ve Access Token Kullanımı</p>
 <p>• Refresh Token Kullanımı</p>
 
@@ -103,7 +102,7 @@ Detaylı bir şekilde aşşağıda görseller ile destekleyerek projenin açıkl
 ![Console Logging2](https://user-images.githubusercontent.com/112801816/232364291-bf027100-574b-4a93-b1ab-71ab4eeb4e8a.png)
 
 </br>
-<h2>🔶 TDD xUnit Test ile birim testi </h2>
+<h2>🔶 xUnit Test ile birim testi </h2>
 </br>
 <p>◉ Birim testi, yazılım programlamasında bir tasarım ve geliştirme yöntemidir. </p>
 <p>◉ Bu yöntemde yazılımcı yazılım kodunu oluşturan birimlerin kullanıma hazır olduğuna iknâ olur. </p>
