@@ -133,10 +133,3 @@ Detaylı bir şekilde aşşağıda görseller ile destekleyerek projenin açıkl
 <p>◉ Swashbuckle.AspNetCore </p>
 <p>◉ xunit </p>
 </br>
-
-<p>Patika Academy'deki <a href="https://academy.patika.dev/courses/net-core">link</a> kurstan faydalanarak oradaki Book Store projesinin farklı bir versiyonu olan Movie Store'yi yaparak
-kendimi geliştirdim.</p>
-
-<h2 align="center">🌟Proje'yi Yıldızlayıp(⭐) bana destekte bulunabilirsiniz..🌟</h5>
-
-
